@@ -81,11 +81,15 @@ const findBirthdays = async () => {
       .toString();
 
     console.log("formatedDate", formattedDate);
+
     const pipeline = [
       {
         $addFields: {
           dayMonth: {
-            $substr: ["$dob", 0, 5], // Extract first 5 characters (DD-MM)
+            $dateToString: {
+              format: "%d-%m",
+              date: "$dob",
+            },
           },
         },
       },
@@ -96,6 +100,7 @@ const findBirthdays = async () => {
       },
     ];
 
+    // const birthdays = await UserModel.aggregate(pipeline);
     const birthdays = await UserModel.aggregate(pipeline);
 
     if (birthdays.length != 0) {
@@ -109,11 +114,19 @@ const findBirthdays = async () => {
   }
 };
 
+
 // findBirthdays();
 
 // Schedule the function to run every day at 12.00 am
-cron.schedule("20 22 * * *", findBirthdays);
+cron.schedule("55 22 * * *", findBirthdays);
 
 app.listen(5000, () => {
   console.log("hello from 5000");
 });
+
+//use for format whole dbs users dobs
+
+// UserModel.updateMany(
+//   { dob: { $type: 'string' } },
+//   [{ $set: { dob: { $dateFromString: { dateString: "$dob" } } } }]
+// ).exec();
