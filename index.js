@@ -7,6 +7,7 @@ const wppconnect = require("@wppconnect-team/wppconnect");
 const mongoose = require("mongoose");
 const UserModel = require("./src/models/users-model");
 const cors = require("cors");
+const moment = require("moment-timezone");
 require("dotenv").config();
 
 app.use(cors());
@@ -23,6 +24,11 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+
+function getCurrentISTTime() {
+  return moment().tz("Asia/Kolkata");
+}
+getCurrentISTTime();
 
 function wish(birthdays) {
   try {
@@ -68,11 +74,12 @@ function wish(birthdays) {
 
 const findBirthdays = async () => {
   try {
-    const today = new Date();
+    // Get the current date and time in UTC
+    const today = getCurrentISTTime();
     const formattedDate = today
-      .toLocaleDateString("en-GB", { day: "2-digit", month: "2-digit" })
-      .split("/")
-      .join("-");
+      .format("DD-MM") // Format as "DD-MM"
+      .toString();
+
     console.log("formatedDate", formattedDate);
     const pipeline = [
       {
@@ -102,8 +109,10 @@ const findBirthdays = async () => {
   }
 };
 
+findBirthdays();
+
 // Schedule the function to run every day at 12.00 am
-cron.schedule("30 21 * * *", findBirthdays);
+cron.schedule("12 22 * * *", findBirthdays);
 
 app.listen(5000, () => {
   console.log("hello from 5000");
