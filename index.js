@@ -117,7 +117,7 @@ const findBirthdays = async () => {
 // findBirthdays();
 
 // Schedule the function to run every day at 12.00 am
-cron.schedule("2 23 * * *", findBirthdays, {
+cron.schedule("* * * * *", findBirthdays, {
   scheduled: true,
   timezone: "Asia/Kolkata",
 });
