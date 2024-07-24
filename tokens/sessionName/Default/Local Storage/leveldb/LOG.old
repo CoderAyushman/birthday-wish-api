@@ -1,0 +1,6 @@
+2024/07/24-19:58:01.123 313c Reusing MANIFEST D:\back-end\node-back-end\wish-api\tokens\sessionName\Default\Local Storage\leveldb/MANIFEST-000001
+2024/07/24-19:58:01.124 313c Recovering log #16
+2024/07/24-19:58:01.124 313c Reusing old log D:\back-end\node-back-end\wish-api\tokens\sessionName\Default\Local Storage\leveldb/000016.log 
+2024/07/24-20:14:01.245 313c Level-0 table #20: started
+2024/07/24-20:14:01.261 313c Level-0 table #20: 12846 bytes OK
+2024/07/24-20:14:01.262 313c Delete type=0 #16
