@@ -109,10 +109,10 @@ const findBirthdays = async () => {
   }
 };
 
-findBirthdays();
+// findBirthdays();
 
 // Schedule the function to run every day at 12.00 am
-cron.schedule("12 22 * * *", findBirthdays);
+cron.schedule("20 22 * * *", findBirthdays);
 
 app.listen(5000, () => {
   console.log("hello from 5000");
