@@ -114,11 +114,13 @@ const findBirthdays = async () => {
   }
 };
 
-
 // findBirthdays();
 
 // Schedule the function to run every day at 12.00 am
-cron.schedule("55 22 * * *", findBirthdays);
+cron.schedule("2 23 * * *", findBirthdays, {
+  scheduled: true,
+  timezone: "Asia/Kolkata",
+});
 
 app.listen(5000, () => {
   console.log("hello from 5000");
