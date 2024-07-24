@@ -15,7 +15,6 @@
     "crons": [
         {
           "path": "/api/cron",
-          "timezone": "Asia/Kolkata",
           "schedule": "0 0 * * *"
         }
       ]
