@@ -117,17 +117,25 @@ const findBirthdays = async () => {
 // findBirthdays();
 
 // Schedule the function to run every day at 12.00 am
-cron.schedule(
-  "* * * * *",
-  () => {
+// cron.schedule(
+//   "* * * * *",
+//   () => {
+//     findBirthdays();
+//   },
+//   {
+//     scheduled: true,
+//     timezone: "Asia/Kolkata",
+//   }
+// );
+app.get("/api/cron", async (req, res) => {
+  try {
     findBirthdays();
-  },
-  {
-    scheduled: true,
-    timezone: "Asia/Kolkata",
+    console.log("Cron job is working (FROM ROUTE)");
+    res.send("Cron job is working");
+  } catch (error) {
+    console.log(error)
   }
-);
-
+});
 app.listen(5000, () => {
   console.log("hello from 5000");
 });
