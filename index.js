@@ -15,15 +15,15 @@ app.use(express.json());
 app.use(router);
 app.use(createUserRouter);
 
-// //connect to mongoDb
-// mongoose
-//   .connect(process.env.mongoUrl,{serverSelectionTimeoutMS: 3000})
-//   .then(() => {
-//     console.log("mongodb connected");
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
+//connect to mongoDb
+mongoose
+  .connect(process.env.mongoUrl, { serverSelectionTimeoutMS: 3000 })
+  .then(() => {
+    console.log("mongodb connected");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 function getCurrentISTTime() {
   return moment().tz("Asia/Kolkata");
@@ -74,50 +74,41 @@ const wish = (birthdays) => {
 
 const findBirthdays = async () => {
   try {
-    //connect to mongoDb
-    mongoose
-      .connect(process.env.mongoUrl)
-      .then(async () => {
-        console.log("mongodb connected");
-        // Get the current date and time in UTC
-        const today = getCurrentISTTime();
-        const formattedDate = today
-          .format("DD-MM") // Format as "DD-MM"
-          .toString();
+    // Get the current date and time in UTC
+    const today = getCurrentISTTime();
+    const formattedDate = today
+      .format("DD-MM") // Format as "DD-MM"
+      .toString();
 
-        console.log("formatedDate", formattedDate);
+    console.log("formatedDate", formattedDate);
 
-        const pipeline = [
-          {
-            $addFields: {
-              dayMonth: {
-                $dateToString: {
-                  format: "%d-%m",
-                  date: "$dob",
-                },
-              },
+    const pipeline = [
+      {
+        $addFields: {
+          dayMonth: {
+            $dateToString: {
+              format: "%d-%m",
+              date: "$dob",
             },
           },
-          {
-            $match: {
-              dayMonth: formattedDate,
-            },
-          },
-        ];
+        },
+      },
+      {
+        $match: {
+          dayMonth: "24-07",
+        },
+      },
+    ];
 
-        // const birthdays = await UserModel.aggregate(pipeline);
-        const birthdays = await UserModel.aggregate(pipeline);
-        console.log(birthdays);
+    // const birthdays = await UserModel.aggregate(pipeline);
+    const birthdays = await UserModel.aggregate(pipeline);
+    console.log(birthdays);
 
-        if (birthdays.length != 0) {
-          wish(birthdays);
-        } else {
-          console.log("not a single birthday present");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (birthdays.length != 0) {
+      wish(birthdays);
+    } else {
+      console.log("not a single birthday present");
+    }
   } catch (error) {
     console.log(error);
   }
@@ -126,16 +117,16 @@ const findBirthdays = async () => {
 // findBirthdays();
 
 // Schedule the function to run every day at 12.00 am
-// cron.schedule(
-//   "* * * * *",
-//   () => {
-//     findBirthdays();
-//   },
-//   {
-//     scheduled: true,
-//     timezone: "Asia/Kolkata",
-//   }
-// );
+cron.schedule(
+  "5 * * * *",
+  () => {
+    findBirthdays();
+  },
+  {
+    scheduled: true,
+    timezone: "Asia/Kolkata",
+  }
+);
 app.get("/api/cron", async (req, res) => {
   try {
     findBirthdays();

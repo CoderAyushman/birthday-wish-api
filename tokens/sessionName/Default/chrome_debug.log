@@ -1,0 +1,2 @@
+[0725/143017.770:INFO:CONSOLE(0)] "[object PromiseRejectionEvent]", source:  (0)
+[0725/143017.771:INFO:CONSOLE(16)] "Uncaught (in promise) Error: Comms::sendIq called before startComms", source: https://static.whatsapp.net/rsrc.php/v3/y3/r/y6YE2mWjTXs.js?_nc_x=Ij3Wp8lg5Kz (16)
