@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const router = require("./src/router/messageRouter");
 const createUserRouter = require("./src/router/creatUserRouter");
-const cron = require("node-cron"); // cron is use for set a time when you want to run the function
+// const cron = require("node-cron"); // cron is use for set a time when you want to run the function
 const wppconnect = require("@wppconnect-team/wppconnect");
 const mongoose = require("mongoose");
 const UserModel = require("./src/models/users-model");
@@ -56,12 +56,14 @@ const wish = (birthdays) => {
           let message = `hello ${entry.name} ,this message is for testing purpose`;
           client
             .sendText(phoneNumber, message)
-            .then((result) => {
+            .then( async(result) => {
               console.log("Message sent: ", result);
+              await client.close();
             })
             .catch((error) => {
               console.error("Error when sending message: ", error);
             });
+            
         });
       })
       .catch((error) => {
@@ -95,7 +97,7 @@ const findBirthdays = async () => {
       },
       {
         $match: {
-          dayMonth: formattedDate,
+          dayMonth: "24-07",
         },
       },
     ];
