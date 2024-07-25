@@ -95,7 +95,7 @@ const findBirthdays = async () => {
       },
       {
         $match: {
-          dayMonth: "24-07",
+          dayMonth: formattedDate,
         },
       },
     ];
@@ -117,16 +117,17 @@ const findBirthdays = async () => {
 // findBirthdays();
 
 // Schedule the function to run every day at 12.00 am
-cron.schedule(
-  "5 * * * *",
-  () => {
-    findBirthdays();
-  },
-  {
-    scheduled: true,
-    timezone: "Asia/Kolkata",
-  }
-);
+// cron.schedule(
+//   "5 * * * *",
+//   () => {
+//     findBirthdays();
+//   },
+//   {
+//     scheduled: true,
+//     timezone: "Asia/Kolkata",
+//   }
+// );
+
 app.get("/api/cron", async (req, res) => {
   try {
     findBirthdays();
