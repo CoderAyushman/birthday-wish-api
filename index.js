@@ -50,22 +50,27 @@ const wish = (birthdays) => {
           ignoreDefaultArgs: ["--disable-extensions"], // Ignore this if causing issues
         },
       })
-      .then((client) => {
+      .then(async (client) => {
         // start(client);
-        birthdays.map((entry) => {
+
+        await birthdays.map((entry) => {
           let phoneNumber = `91${entry.number}@c.us`;
           let message = `hello ${entry.name} ,this message is for testing purpose`;
           client
             .sendText(phoneNumber, message)
             .then(async (result) => {
               console.log("Message sent: ", result);
-              await client.close();
             })
             .catch((error) => {
               console.error("Error when sending message: ", error);
             });
         });
+
+        setTimeout(async () => {
+          await client.close();
+        }, 30000);
       })
+
       .catch((error) => {
         console.log(error);
       });
