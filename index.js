@@ -53,7 +53,7 @@ const wish = (birthdays) => {
         // start(client);
         birthdays.map((entry) => {
           let phoneNumber = `91${entry.number}@c.us`;
-          let message = `hello ${entry.name}`;
+          let message = `hello ${entry.name} ,this message is for testing purpose`;
           client
             .sendText(phoneNumber, message)
             .then((result) => {
@@ -76,48 +76,48 @@ const findBirthdays = async () => {
   try {
     //connect to mongoDb
     mongoose
-      .connect(process.env.mongoUrl, { serverSelectionTimeoutMS: 30000 })
-      .then(() => {
+      .connect(process.env.mongoUrl)
+      .then(async () => {
         console.log("mongodb connected");
+        // Get the current date and time in UTC
+        const today = getCurrentISTTime();
+        const formattedDate = today
+          .format("DD-MM") // Format as "DD-MM"
+          .toString();
+
+        console.log("formatedDate", formattedDate);
+
+        const pipeline = [
+          {
+            $addFields: {
+              dayMonth: {
+                $dateToString: {
+                  format: "%d-%m",
+                  date: "$dob",
+                },
+              },
+            },
+          },
+          {
+            $match: {
+              dayMonth: formattedDate,
+            },
+          },
+        ];
+
+        // const birthdays = await UserModel.aggregate(pipeline);
+        const birthdays = await UserModel.aggregate(pipeline);
+        console.log(birthdays);
+
+        if (birthdays.length != 0) {
+          wish(birthdays);
+        } else {
+          console.log("not a single birthday present");
+        }
       })
       .catch((err) => {
         console.log(err);
       });
-    // Get the current date and time in UTC
-    const today = getCurrentISTTime();
-    const formattedDate = today
-      .format("DD-MM") // Format as "DD-MM"
-      .toString();
-
-    console.log("formatedDate", formattedDate);
-
-    const pipeline = [
-      {
-        $addFields: {
-          dayMonth: {
-            $dateToString: {
-              format: "%d-%m",
-              date: "$dob",
-            },
-          },
-        },
-      },
-      {
-        $match: {
-          dayMonth: formattedDate,
-        },
-      },
-    ];
-
-    // const birthdays = await UserModel.aggregate(pipeline);
-    const birthdays = await UserModel.aggregate(pipeline);
-    console.log(birthdays);
-
-    if (birthdays.length != 0) {
-      wish(birthdays);
-    } else {
-      console.log("not a single birthday present");
-    }
   } catch (error) {
     console.log(error);
   }
