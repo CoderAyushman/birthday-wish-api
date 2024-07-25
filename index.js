@@ -17,7 +17,7 @@ app.use(createUserRouter);
 
 //connect to mongoDb
 mongoose
-  .connect(process.env.mongoUrl)
+  .connect(process.env.mongoUrl,{serverSelectionTimeoutMS: 30000})
   .then(() => {
     console.log("mongodb connected");
   })
