@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const UserModel = require("./src/models/users-model");
 const cors = require("cors");
 const moment = require("moment-timezone");
+const port = process.env.PORT || 5000;
 require("dotenv").config();
 
 app.use(cors());
@@ -56,14 +57,13 @@ const wish = (birthdays) => {
           let message = `hello ${entry.name} ,this message is for testing purpose`;
           client
             .sendText(phoneNumber, message)
-            .then( async(result) => {
+            .then(async (result) => {
               console.log("Message sent: ", result);
               await client.close();
             })
             .catch((error) => {
               console.error("Error when sending message: ", error);
             });
-            
         });
       })
       .catch((error) => {
@@ -139,7 +139,7 @@ app.get("/api/cron", async (req, res) => {
     console.log(error);
   }
 });
-app.listen(5000, () => {
+app.listen(port, () => {
   console.log("hello from port 5000");
 });
 
