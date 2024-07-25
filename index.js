@@ -28,9 +28,9 @@ mongoose
 function getCurrentISTTime() {
   return moment().tz("Asia/Kolkata");
 }
-getCurrentISTTime();
+// getCurrentISTTime();
 
-function wish(birthdays) {
+const wish = (birthdays) => {
   try {
     wppconnect
       .create({
@@ -70,7 +70,7 @@ function wish(birthdays) {
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 const findBirthdays = async () => {
   try {
@@ -102,9 +102,9 @@ const findBirthdays = async () => {
 
     // const birthdays = await UserModel.aggregate(pipeline);
     const birthdays = await UserModel.aggregate(pipeline);
+    console.log(birthdays);
 
     if (birthdays.length != 0) {
-      console.log(birthdays);
       wish(birthdays);
     } else {
       console.log("not a single birthday present");
@@ -133,7 +133,7 @@ app.get("/api/cron", async (req, res) => {
     console.log("Cron job is working (FROM ROUTE)");
     res.send("Cron job is working");
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 });
 app.listen(5000, () => {
