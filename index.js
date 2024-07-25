@@ -138,7 +138,7 @@ app.get("/api/cron", async (req, res) => {
   }
 });
 app.listen(5000, () => {
-  console.log("hello from 5000");
+  console.log("hello from port 5000");
 });
 
 //use for format whole dbs users dobs
