@@ -15,15 +15,15 @@ app.use(express.json());
 app.use(router);
 app.use(createUserRouter);
 
-//connect to mongoDb
-mongoose
-  .connect(process.env.mongoUrl,{serverSelectionTimeoutMS: 30000})
-  .then(() => {
-    console.log("mongodb connected");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+// //connect to mongoDb
+// mongoose
+//   .connect(process.env.mongoUrl,{serverSelectionTimeoutMS: 3000})
+//   .then(() => {
+//     console.log("mongodb connected");
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
 
 function getCurrentISTTime() {
   return moment().tz("Asia/Kolkata");
@@ -74,6 +74,15 @@ const wish = (birthdays) => {
 
 const findBirthdays = async () => {
   try {
+    //connect to mongoDb
+    mongoose
+      .connect(process.env.mongoUrl, { serverSelectionTimeoutMS: 3000 })
+      .then(() => {
+        console.log("mongodb connected");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     // Get the current date and time in UTC
     const today = getCurrentISTTime();
     const formattedDate = today
