@@ -76,7 +76,7 @@ const findBirthdays = async () => {
   try {
     //connect to mongoDb
     mongoose
-      .connect(process.env.mongoUrl, { serverSelectionTimeoutMS: 3000 })
+      .connect(process.env.mongoUrl, { serverSelectionTimeoutMS: 30000 })
       .then(() => {
         console.log("mongodb connected");
       })
