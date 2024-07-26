@@ -31,6 +31,8 @@ function getCurrentISTTime() {
 }
 // getCurrentISTTime();
 
+//for cheacking is our whatsapp client is ready or not
+
 const wish = (birthdays) => {
   try {
     wppconnect
@@ -39,6 +41,7 @@ const wish = (birthdays) => {
         headless: true, // Set to false to see the browser window
         devtools: false, // Optionally open devtools
         useChrome: false, // Use Chrome instead of Chromium if puppeeter is causing error
+        autoClose: 600000,
         puppeteerOptions: {
           args: [
             "--no-sandbox",
@@ -52,7 +55,17 @@ const wish = (birthdays) => {
       })
       .then(async (client) => {
         // start(client);
+        setTimeout(() => {
+          sendMessage(client);
+        }, 10000);
+      })
 
+      .catch((error) => {
+        console.log(error);
+      });
+
+    const sendMessage = async (client) => {
+      try {
         await birthdays.map((entry) => {
           let phoneNumber = `91${entry.number}@c.us`;
           let message = `hello ${entry.name} ,this message is for testing purpose`;
@@ -65,15 +78,10 @@ const wish = (birthdays) => {
               console.error("Error when sending message: ", error);
             });
         });
-
-        setTimeout(async () => {
-          await client.close();
-        }, 1200000);
-      })
-
-      .catch((error) => {
-        console.log(error);
-      });
+      } catch (error) {
+        console.error("Error sending message:", error);
+      }
+    };
   } catch (error) {
     console.log(error);
   }
