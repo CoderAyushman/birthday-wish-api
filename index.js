@@ -8,8 +8,10 @@ const mongoose = require("mongoose");
 const UserModel = require("./src/models/users-model");
 const cors = require("cors");
 const moment = require("moment-timezone");
+const axios = require("axios");
 const port = process.env.PORT || 5000;
 require("dotenv").config();
+const zapUrl = process.env.zapUrl;
 
 app.use(cors());
 app.use(express.json());
@@ -68,7 +70,7 @@ const wish = (birthdays) => {
 
         setTimeout(async () => {
           await client.close();
-        },1200000);
+        }, 1200000);
       })
 
       .catch((error) => {
@@ -144,6 +146,22 @@ app.get("/api/cron", async (req, res) => {
     console.log(error);
   }
 });
+
+async function sendGetRequest() {
+  try {
+    // Send GET request to Zapier webhook URL
+    const response = await axios.get(zapUrl);
+
+    // Log response from Zapier
+    console.log("Response from Zapier:", response.data);
+  } catch (error) {
+    console.error("Error sending GET request to Zapier:", error);
+  }
+}
+
+// Call the function to send the GET request
+sendGetRequest();
+
 app.listen(port, () => {
   console.log("hello from port 5000");
 });
