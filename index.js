@@ -68,7 +68,7 @@ const wish = (birthdays) => {
 
         setTimeout(async () => {
           await client.close();
-        }, 30000);
+        },1200000);
       })
 
       .catch((error) => {
