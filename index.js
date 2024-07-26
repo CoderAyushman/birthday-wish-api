@@ -116,7 +116,7 @@ const findBirthdays = async () => {
       },
       {
         $match: {
-          dayMonth: "24-07",
+          dayMonth: formattedDate,
         },
       },
     ];

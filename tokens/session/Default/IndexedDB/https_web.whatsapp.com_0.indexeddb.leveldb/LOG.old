@@ -1,12 +1,7 @@
-2024/07/26-23:30:52.972 18ac Reusing MANIFEST D:\back-end\node-back-end\wish-api\tokens\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2024/07/26-23:30:52.972 18ac Recovering log #78
-2024/07/26-23:30:53.118 18ac Reusing old log D:\back-end\node-back-end\wish-api\tokens\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000078.log 
-2024/07/26-23:30:54.224 18ac Level-0 table #84: started
-2024/07/26-23:30:54.248 18ac Level-0 table #84: 627851 bytes OK
-2024/07/26-23:30:54.249 18ac Delete type=0 #78
-2024/07/26-23:30:54.250 18ac Manual compaction at level-0 from '\x00 \x00\x00\x00' @ 72057594037927935 : 1 .. '\x00!\x00\x00\x00' @ 0 : 0; will stop at (end)
-2024/07/26-23:30:58.239 3d2c Compacting 1@1 + 2@2 files
-2024/07/26-23:30:58.357 3d2c Generated table #85@1: 47455 keys, 2205222 bytes
-2024/07/26-23:30:58.415 3d2c Generated table #86@1: 16165 keys, 1056781 bytes
-2024/07/26-23:30:58.415 3d2c Compacted 1@1 + 2@2 files => 3262003 bytes
-2024/07/26-23:30:58.416 3d2c compacted to: files[ 0 0 2 0 0 0 0 ]
+2024/07/26-23:31:59.555 3c84 Reusing MANIFEST D:\back-end\node-back-end\wish-api\tokens\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2024/07/26-23:31:59.555 3c84 Recovering log #83
+2024/07/26-23:31:59.601 3c84 Reusing old log D:\back-end\node-back-end\wish-api\tokens\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000083.log 
+2024/07/26-23:31:59.602 3c84 Delete type=2 #80
+2024/07/26-23:31:59.602 3c84 Delete type=2 #81
+2024/07/26-23:31:59.602 3c84 Delete type=2 #84
+2024/07/26-23:32:00.766 4254 Manual compaction at level-0 from '\x00!\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00"\x00\x00\x00' @ 0 : 0; will stop at (end)
