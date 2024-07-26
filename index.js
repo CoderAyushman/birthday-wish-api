@@ -18,7 +18,7 @@ app.use(createUserRouter);
 
 //connect to mongoDb
 mongoose
-  .connect(process.env.mongoUrl, { serverSelectionTimeoutMS: 3000 })
+  .connect(process.env.mongoUrl, { serverSelectionTimeoutMS: 5000 })
   .then(() => {
     console.log("mongodb connected");
   })
@@ -54,10 +54,15 @@ const wish = (birthdays) => {
         },
       })
       .then(async (client) => {
-        // start(client);
-        setTimeout(() => {
+        try {
+          await client.initialize();
+          console.log("Client initialized successfully");
+
+          await new Promise((resolve) => setTimeout(resolve, 10000)); // Delay using Promise
           sendMessage(client);
-        }, 10000);
+        } catch (error) {
+          console.error("Error initializing client:", error);
+        }
       })
 
       .catch((error) => {
