@@ -41,7 +41,7 @@ const wish = (birthdays) => {
         headless: true, // Set to false to see the browser window
         devtools: false, // Optionally open devtools
         useChrome: false, // Use Chrome instead of Chromium if puppeeter is causing error
-        autoClose: 600000,
+        autoClose: 300000,
         puppeteerOptions: {
           args: [
             "--no-sandbox",
@@ -58,8 +58,9 @@ const wish = (birthdays) => {
           await client.initialize();
           console.log("Client initialized successfully");
 
-          await new Promise((resolve) => setTimeout(resolve, 10000)); // Delay using Promise
-          sendMessage(client);
+          setTimeout(() => {
+            sendMessage(client);
+          }, 10000);
         } catch (error) {
           console.error("Error initializing client:", error);
         }
