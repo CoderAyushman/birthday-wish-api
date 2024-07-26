@@ -1,0 +1,26 @@
+[0726/203941.507:ERROR:cache_util_win.cc(20)] Unable to move the cache: Access is denied. (0x5)
+[0726/203941.507:ERROR:cache_util_win.cc(20)] Unable to move the cache: Access is denied. (0x5)
+[0726/203941.507:ERROR:disk_cache.cc(205)] Unable to create cache
+[0726/203941.507:ERROR:gpu_disk_cache.cc(673)] Gpu Cache Creation failed: -2
+[0726/203941.507:ERROR:disk_cache.cc(205)] Unable to create cache
+[0726/203941.507:ERROR:gpu_disk_cache.cc(673)] Gpu Cache Creation failed: -2
+[0726/203941.704:ERROR:cache_util_win.cc(20)] Unable to move the cache: Access is denied. (0x5)
+[0726/203941.704:ERROR:disk_cache.cc(205)] Unable to create cache
+[0726/204005.033:ERROR:quota_database.cc(929)] Could not open the quota database, resetting.
+[0726/204009.732:ERROR:quota_database.cc(929)] Could not open the quota database, resetting.
+[0726/204012.641:ERROR:quota_database.cc(931)] Failed to reset the quota database.
+[0726/204012.641:ERROR:quota_database.cc(931)] Failed to reset the quota database.
+[0726/204014.429:INFO:CONSOLE(997)] "[object Event]", source: https://static.whatsapp.net/rsrc.php/v3iPAE4/yi/l/rt/ZyqjVn5iU8y.js?_nc_x=Ij3Wp8lg5Kz (997)
+[0726/204014.431:INFO:CONSOLE(997)] "[object Event]", source: https://static.whatsapp.net/rsrc.php/v3iPAE4/yi/l/rt/ZyqjVn5iU8y.js?_nc_x=Ij3Wp8lg5Kz (997)
+[0726/204058.276:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Feature xr-spatial-tracking's parameters are ignored.", source:  (0)
+[0726/204058.276:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Origin trial controlled feature not enabled: 'attribution-reporting'.", source:  (0)
+[0726/204058.276:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Unrecognized feature: 'battery'.", source:  (0)
+[0726/204058.277:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Unrecognized feature: 'compute-pressure'.", source:  (0)
+[0726/204058.277:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Origin trial controlled feature not enabled: 'interest-cohort'.", source:  (0)
+[0726/204058.277:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Unrecognized feature: 'private-state-token-issuance'.", source:  (0)
+[0726/204058.277:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Origin trial controlled feature not enabled: 'shared-storage'.", source:  (0)
+[0726/204058.277:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Unrecognized feature: 'shared-storage-select-url'.", source:  (0)
+[0726/204058.277:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Unrecognized feature: 'private-state-token-redemption'.", source:  (0)
+[0726/204058.277:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Unrecognized feature: 'usb-unrestricted'.", source:  (0)
+[0726/204058.277:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Unrecognized feature: 'unload'.", source:  (0)
+[0726/204058.277:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Unrecognized feature: 'window-management'.", source:  (0)

@@ -1,4 +1,0 @@
-2024/07/25-23:18:17.016 1e4c Reusing MANIFEST D:\back-end\node-back-end\wish-api\tokens\sessionName\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2024/07/25-23:18:17.017 1e4c Recovering log #508
-2024/07/25-23:18:17.132 1e4c Reusing old log D:\back-end\node-back-end\wish-api\tokens\sessionName\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000508.log 
-2024/07/25-23:18:18.212 1ec0 Manual compaction at level-0 from '\x00y\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00z\x00\x00\x00' @ 0 : 0; will stop at (end)

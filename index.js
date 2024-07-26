@@ -35,7 +35,7 @@ const wish = (birthdays) => {
   try {
     wppconnect
       .create({
-        session: "sessionName",
+        // session: "sessionName",
         headless: true, // Set to false to see the browser window
         devtools: false, // Optionally open devtools
         useChrome: false, // Use Chrome instead of Chromium if puppeeter is causing error
