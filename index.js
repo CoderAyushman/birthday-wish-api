@@ -41,7 +41,7 @@ const wish = (birthdays) => {
         headless: true, // Set to false to see the browser window
         devtools: false, // Optionally open devtools
         useChrome: false, // Use Chrome instead of Chromium if puppeeter is causing error
-        autoClose: 300000,
+
         puppeteerOptions: {
           args: [
             "--no-sandbox",
@@ -83,6 +83,11 @@ const wish = (birthdays) => {
             .catch((error) => {
               console.error("Error when sending message: ", error);
             });
+
+          //close client after 10 minutes
+          setTimeout(() => {
+            client.close();
+          }, 600000);
         });
       } catch (error) {
         console.error("Error sending message:", error);
