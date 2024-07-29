@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const router = require("./src/router/messageRouter");
 const createUserRouter = require("./src/router/creatUserRouter");
-// const cron = require("node-cron"); // cron is use for set a time when you want to run the function
 const wppconnect = require("@wppconnect-team/wppconnect");
 const mongoose = require("mongoose");
 const UserModel = require("./src/models/users-model");
@@ -29,7 +28,6 @@ mongoose
 function getCurrentISTTime() {
   return moment().tz("Asia/Kolkata");
 }
-// getCurrentISTTime();
 
 //for cheacking is our whatsapp client is ready or not
 
@@ -37,7 +35,6 @@ const wish = (birthdays) => {
   try {
     wppconnect
       .create({
-        // session: "sessionName",
         headless: true, // Set to false to see the browser window
         devtools: false, // Optionally open devtools
         useChrome: false, // Use Chrome instead of Chromium if puppeeter is causing error
@@ -74,7 +71,7 @@ const wish = (birthdays) => {
       try {
         await birthdays.map((entry) => {
           let phoneNumber = `91${entry.number}@c.us`;
-          let message = `Happy Birthday, ${entry.name}!
+          let message = `Happy Birthday, ${entry.Name}!
 
 🎉🎂 Wishing you a fantastic day filled with joy and laughter! May this year bring you success, happiness, and unforgettable moments. Your enthusiasm and positive spirit at VSBM are truly inspiring. Enjoy your special day to the fullest!
 
@@ -119,7 +116,7 @@ const findBirthdays = async () => {
           dayMonth: {
             $dateToString: {
               format: "%d-%m",
-              date: "$dob",
+              date: "$DOB",
             },
           },
         },
@@ -144,20 +141,6 @@ const findBirthdays = async () => {
     console.log(error);
   }
 };
-
-// findBirthdays();
-
-// Schedule the function to run every day at 12.00 am
-// cron.schedule(
-//   "5 * * * *",
-//   () => {
-//     findBirthdays();
-//   },
-//   {
-//     scheduled: true,
-//     timezone: "Asia/Kolkata",
-//   }
-// );
 
 app.get("/api/cron", async (req, res) => {
   try {

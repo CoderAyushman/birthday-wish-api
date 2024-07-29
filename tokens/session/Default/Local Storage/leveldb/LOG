@@ -1,3 +1,6 @@
-2024/07/29-12:49:15.421 1c68 Reusing MANIFEST D:\back-end\node-back-end\wish-api\tokens\session\Default\Local Storage\leveldb/MANIFEST-000001
-2024/07/29-12:49:15.423 1c68 Recovering log #4
-2024/07/29-12:49:15.423 1c68 Reusing old log D:\back-end\node-back-end\wish-api\tokens\session\Default\Local Storage\leveldb/000004.log 
+2024/07/29-22:22:30.002 3060 Reusing MANIFEST D:\back-end\node-back-end\wish-api\tokens\session\Default\Local Storage\leveldb/MANIFEST-000001
+2024/07/29-22:22:30.002 3060 Recovering log #4
+2024/07/29-22:22:30.003 3060 Reusing old log D:\back-end\node-back-end\wish-api\tokens\session\Default\Local Storage\leveldb/000004.log 
+2024/07/29-22:23:30.218 265c Level-0 table #7: started
+2024/07/29-22:23:30.227 265c Level-0 table #7: 19539 bytes OK
+2024/07/29-22:23:30.229 265c Delete type=0 #4
