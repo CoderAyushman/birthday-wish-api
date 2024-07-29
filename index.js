@@ -74,7 +74,12 @@ const wish = (birthdays) => {
       try {
         await birthdays.map((entry) => {
           let phoneNumber = `91${entry.number}@c.us`;
-          let message = `hello ${entry.name} ,this message is for testing purpose`;
+          let message = `Happy Birthday, ${entry.name}!
+
+🎉🎂 Wishing you a fantastic day filled with joy and laughter! May this year bring you success, happiness, and unforgettable moments. Your enthusiasm and positive spirit at VSBM are truly inspiring. Enjoy your special day to the fullest!
+
+Best wishes,
+[Saraswati Dash/VSBM]`;
           client
             .sendText(phoneNumber, message)
             .then(async (result) => {
