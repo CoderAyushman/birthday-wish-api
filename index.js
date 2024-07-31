@@ -89,7 +89,7 @@ Best wishes,
           //close client after 10 minutes
           setTimeout(() => {
             client.close();
-          }, 600000);
+          }, 1800000);
         });
       } catch (error) {
         console.error("Error sending message:", error);
