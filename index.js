@@ -69,7 +69,7 @@ const wish = (birthdays) => {
 
     const sendMessage = async (client) => {
       try {
-        await birthdays.map((entry) => {
+        await birthdays.map(async (entry) => {
           let phoneNumber = `91${entry.number}@c.us`;
           let message = `Happy Birthday, ${entry.Name}!
 
@@ -77,7 +77,7 @@ const wish = (birthdays) => {
 
 Best wishes,
 [Saraswati Dash/VSBM]`;
-          client
+          await client
             .sendText(phoneNumber, message)
             .then(async (result) => {
               console.log("Message sent: ", result);
@@ -89,7 +89,7 @@ Best wishes,
           //close client after 10 minutes
           setTimeout(() => {
             client.close();
-          }, 1800000);
+          }, 1000 * 60 * 60);
         });
       } catch (error) {
         console.error("Error sending message:", error);
