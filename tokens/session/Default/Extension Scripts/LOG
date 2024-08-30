@@ -1,2 +1,3 @@
-2024/07/29-12:44:38.806 217c Creating DB D:\back-end\node-back-end\wish-api\tokens\session\Default\Extension Scripts since it was missing.
-2024/07/29-12:44:38.814 217c Reusing MANIFEST D:\back-end\node-back-end\wish-api\tokens\session\Default\Extension Scripts/MANIFEST-000001
+2024/08/20-11:09:54.368 2eb8 Reusing MANIFEST D:\back-end\node-back-end\wish-api\tokens\session\Default\Extension Scripts/MANIFEST-000001
+2024/08/20-11:09:54.387 2eb8 Recovering log #3
+2024/08/20-11:09:54.388 2eb8 Reusing old log D:\back-end\node-back-end\wish-api\tokens\session\Default\Extension Scripts/000003.log 
