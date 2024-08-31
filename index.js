@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const router = require("./src/router/messageRouter");
 const createUserRouter = require("./src/router/creatUserRouter");
-const wppconnect = require("@wppconnect-team/wppconnect");
 const mongoose = require("mongoose");
 const UserModel = require("./src/models/users-model");
 const cors = require("cors");
@@ -33,68 +32,54 @@ function getCurrentISTTime() {
 
 const wish = (birthdays) => {
   try {
-    wppconnect
-      .create({
-        headless: true, // Set to false to see the browser window
-        devtools: false, // Optionally open devtools
-        useChrome: false, // Use Chrome instead of Chromium if puppeeter is causing error
-
-        puppeteerOptions: {
-          args: [
-            "--no-sandbox",
-            "--disable-setuid-sandbox",
-            "--disable-dev-shm-usage",
-            "--disable-accelerated-2d-canvas",
-            "--disable-gpu",
+    birthdays.map((student) => {
+      const data = JSON.stringify({
+        messaging_product: "whatsapp",
+        preview_url: false,
+        recipient_type: "individual",
+        to: `91${student.number}`,
+        type: "template",
+        template: {
+          name: "student_birthday_wish",
+          language: { code: "en" },
+          components: [
+            {
+              type: "body",
+              parameters: [
+                {
+                  type: "text",
+                  text: `${student.Name}`,
+                },
+              ],
+            },
           ],
-          ignoreDefaultArgs: ["--disable-extensions"], // Ignore this if causing issues
         },
-      })
-      .then(async (client) => {
-        try {
-          await client.initialize();
-          console.log("Client initialized successfully");
-
-          setTimeout(() => {
-            sendMessage(client);
-          }, 10000);
-        } catch (error) {
-          console.error("Error initializing client:", error);
-        }
-      })
-
-      .catch((error) => {
-        console.log(error);
       });
 
-    const sendMessage = async (client) => {
-      try {
-        await birthdays.map(async (entry) => {
-          let phoneNumber = `91${entry.number}@c.us`;
-          let message = `Happy Birthday, ${entry.Name}!
-
-🎉🎂 Wishing you a fantastic day filled with joy and laughter! May this year bring you success, happiness, and unforgettable moments. Your enthusiasm and positive spirit at VSBM are truly inspiring. Enjoy your special day to the fullest!
-
-Best wishes,
-[Saraswati Dash/VSBM]`;
-          await client
-            .sendText(phoneNumber, message)
-            .then(async (result) => {
-              console.log("Message sent: ", result);
-            })
-            .catch((error) => {
-              console.error("Error when sending message: ", error);
-            });
-
-          //close client after 10 minutes
-          setTimeout(() => {
-            client.close();
-          }, 1000 * 60 * 60);
+      const headers = {
+        Authorization: `Bearer EAAVrnNBcbqABO8GL1QhkMZB37LEbDyVwBmq2b78TqTyncGD7gxkZC1GX8aDXD6utIlfeLRJZATBajawxsfvvVXijVdY9IRgMeXBGXka1Hp7KjO6l7Oc6eCWVuFEW9mi6xpa0TXMHDs76BsBUVZCIzNlvyeNs3VqyNs13NbqZCXz0b3e6T5iKe4ZCCCqSCISPxFnEtyKcLBLMQ14MGWh8dCh4R1pIkXMwndU1UZD`,
+        "Content-Type": "application/json",
+      };
+      axios
+        .post(
+          "https://graph.facebook.com/v20.0/362948586905168/messages",
+          data,
+          {
+            headers,
+          }
+        )
+        .then((response) => {
+          // Handle the response
+          console.log("Response:", response.data);
+        })
+        .catch((error) => {
+          // Handle the error
+          console.error(
+            "Error:",
+            error.response ? error.response.data : error.message
+          );
         });
-      } catch (error) {
-        console.error("Error sending message:", error);
-      }
-    };
+    });
   } catch (error) {
     console.log(error);
   }
