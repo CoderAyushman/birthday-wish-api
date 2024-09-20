@@ -22,7 +22,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  Semster: {
+  Semester: {
     type: String,
     required: true,
   },
