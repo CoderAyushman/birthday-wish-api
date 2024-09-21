@@ -105,9 +105,8 @@ const wishUsingMail = async (birthdays) => {
         to: student.Email, // Receiver's email
         subject: "Test Email from Nodemailer", // Subject line
         html: `<!DOCTYPE html>
-<html lang="en">
-
-<head>
+ <html lang="en">
+ <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Birthday Wishes</title>
@@ -189,7 +188,7 @@ const wishUsingMail = async (birthdays) => {
   <div class="container">
     <!-- Header with Image -->
     <div class="header">
-      <img src="https://thumbs.dreamstime.com/b/happy-birthday-flowers-background-323125849.jpg" alt="Happy Birthday">
+       <img src="https://thumbs.dreamstime.com/b/happy-birthday-flowers-background-323125849.jpg" alt="Happy Birthday">
     </div>
 
     <!-- Content Section -->
@@ -290,3 +289,80 @@ app.listen(port, () => {
 // UserModel.updateMany({ DOB: { $type: "string" } }, [
 //   { $set: { DOB: { $dateFromString: { dateString: "$DOB" } } } },
 // ]).exec();
+
+// UserModel.updateMany({ DOB: { $exists: true, $type: "string" } }, [
+//   {
+//     $set: {
+//       DOB: {
+//         $let: {
+//           vars: {
+//             parts: {
+//               $split: [
+//                 {
+//                   $replaceAll: {
+//                     input: "$DOB",
+//                     find: /[-./]/,
+//                     replacement: "-",
+//                   },
+//                 },
+//                 "-",
+//               ],
+//             },
+//           },
+//           in: {
+//             $concat: [
+//               { $arrayElemAt: ["$$parts", 2] }, // Year
+//               "-",
+//               { $arrayElemAt: ["$$parts", 1] }, // Month
+//               "-",
+//               { $arrayElemAt: ["$$parts", 0] }, // Day
+//             ],
+//           },
+//         },
+//       },
+//     },
+//   },
+// ]);
+
+UserModel.aggregate([
+  {
+    $addFields: {
+      // Replace slashes, dots, and dashes with hyphens for uniformity
+      formattedDOB: {
+        $replaceAll: {
+          input: "$dob", // Assuming "dob" is the field storing the date
+          find: "/",
+          replacement: "-",
+        },
+      },
+    },
+  },
+  {
+    $addFields: {
+      formattedDOB: {
+        $replaceAll: {
+          input: "$formattedDOB",
+          find: ".",
+          replacement: "-",
+        },
+      },
+    },
+  },
+  {
+    $addFields: {
+      // Convert the string to date using the format dd-MM-yyyy
+      formattedDOB: {
+        $dateFromString: {
+          dateString: "$formattedDOB",
+          format: "%d-%m-%Y",
+        },
+      },
+    },
+  },
+  {
+    $merge: {
+      into: "collection", // Replace with your collection name
+      whenMatched: "merge",
+    },
+  },
+]);
