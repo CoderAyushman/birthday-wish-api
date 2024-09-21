@@ -29,9 +29,9 @@ function getCurrentISTTime() {
   return moment().tz("Asia/Kolkata");
 }
 
-//for cheacking is our whatsapp client is ready or not
+//using whatsapp business api
 
-const wish = (birthdays) => {
+const wishUsingWhatsapp = (birthdays) => {
   try {
     birthdays.map((student) => {
       const data = JSON.stringify({
@@ -58,12 +58,12 @@ const wish = (birthdays) => {
       });
 
       const headers = {
-        Authorization: `Bearer EAAVrnNBcbqABO8GL1QhkMZB37LEbDyVwBmq2b78TqTyncGD7gxkZC1GX8aDXD6utIlfeLRJZATBajawxsfvvVXijVdY9IRgMeXBGXka1Hp7KjO6l7Oc6eCWVuFEW9mi6xpa0TXMHDs76BsBUVZCIzNlvyeNs3VqyNs13NbqZCXz0b3e6T5iKe4ZCCCqSCISPxFnEtyKcLBLMQ14MGWh8dCh4R1pIkXMwndU1UZD`,
+        Authorization: `Bearer ${process.env.accessToken}`,
         "Content-Type": "application/json",
       };
       axios
         .post(
-          "https://graph.facebook.com/v20.0/362948586905168/messages",
+          `https://graph.facebook.com/v20.0/${process.env.phoneNumberId}/messages`,
           data,
           {
             headers,
@@ -104,8 +104,10 @@ const wishUsingMail = async (birthdays) => {
         from: process.env.emailFrom, // Sender's email
         to: student.Email, // Receiver's email
         subject: "Test Email from Nodemailer", // Subject line
-        html: `<!DOCTYPE html>
- <html lang="en">
+        //design message template
+        html: `
+<!DOCTYPE html>
+<html lang="en">
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -259,7 +261,7 @@ const findBirthdays = async () => {
     console.log(birthdays);
 
     if (birthdays.length != 0) {
-      // wish(birthdays);
+      // wishUsingWhatsapp(birthdays);
       wishUsingMail(birthdays);
     } else {
       console.log("not a single birthday present");
@@ -283,86 +285,3 @@ app.get("/api/cron", async (req, res) => {
 app.listen(port, () => {
   console.log("hello from port 5000");
 });
-
-//use for format whole dbs users dobs
-
-// UserModel.updateMany({ DOB: { $type: "string" } }, [
-//   { $set: { DOB: { $dateFromString: { dateString: "$DOB" } } } },
-// ]).exec();
-
-// UserModel.updateMany({ DOB: { $exists: true, $type: "string" } }, [
-//   {
-//     $set: {
-//       DOB: {
-//         $let: {
-//           vars: {
-//             parts: {
-//               $split: [
-//                 {
-//                   $replaceAll: {
-//                     input: "$DOB",
-//                     find: /[-./]/,
-//                     replacement: "-",
-//                   },
-//                 },
-//                 "-",
-//               ],
-//             },
-//           },
-//           in: {
-//             $concat: [
-//               { $arrayElemAt: ["$$parts", 2] }, // Year
-//               "-",
-//               { $arrayElemAt: ["$$parts", 1] }, // Month
-//               "-",
-//               { $arrayElemAt: ["$$parts", 0] }, // Day
-//             ],
-//           },
-//         },
-//       },
-//     },
-//   },
-// ]);
-
-UserModel.aggregate([
-  {
-    $addFields: {
-      // Replace slashes, dots, and dashes with hyphens for uniformity
-      formattedDOB: {
-        $replaceAll: {
-          input: "$dob", // Assuming "dob" is the field storing the date
-          find: "/",
-          replacement: "-",
-        },
-      },
-    },
-  },
-  {
-    $addFields: {
-      formattedDOB: {
-        $replaceAll: {
-          input: "$formattedDOB",
-          find: ".",
-          replacement: "-",
-        },
-      },
-    },
-  },
-  {
-    $addFields: {
-      // Convert the string to date using the format dd-MM-yyyy
-      formattedDOB: {
-        $dateFromString: {
-          dateString: "$formattedDOB",
-          format: "%d-%m-%Y",
-        },
-      },
-    },
-  },
-  {
-    $merge: {
-      into: "collection", // Replace with your collection name
-      whenMatched: "merge",
-    },
-  },
-]);
