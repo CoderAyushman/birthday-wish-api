@@ -103,7 +103,7 @@ const wishUsingMail = async (birthdays) => {
       const mailOptions = {
         from: process.env.emailFrom, // Sender's email
         to: student.Email, // Receiver's email
-        subject: "Test Email from Nodemailer", // Subject line
+        subject: "Email from VSBM", // Subject line
         //design message template
         html: `
 <!DOCTYPE html>
