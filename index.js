@@ -205,7 +205,7 @@ const wishUsingMail = async (birthdays) => {
 
     <!-- Footer -->
     <div class="footer">
-      <p>Sent with love by [Ayushman]</p>
+      <p>Sent with love by [VSBM]</p>
       
     </div>
   </div>
