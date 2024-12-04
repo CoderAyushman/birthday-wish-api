@@ -285,3 +285,22 @@ app.get("/api/cron", async (req, res) => {
 app.listen(port, () => {
   console.log("hello from port 5000");
 });
+
+//use for format whole dbs users dobs
+
+// UserModel.updateMany({ DOB: { $type: "string" } }, [
+//   { $set: { DOB: { $dateFromString: { dateString: "$DOB" } } } },
+// ]).exec();
+
+// UserModel.updateMany({ dob: { $type: "string" } }, [
+//   {
+//     $set: {
+//       dob: {
+//         $dateFromString: {
+//           dateString: "$dob",
+//           format: "%d.%m.%Y",
+//         },
+//       },
+//     },
+//   },
+// ]).exec();
