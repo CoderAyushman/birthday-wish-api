@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(router);
 app.use(createUserRouter);
 
-//connect to mongoDb
+//connect to mongo Db
 mongoose
   .connect(process.env.mongoUrl, { serverSelectionTimeoutMS: 5000 })
   .then(() => {
